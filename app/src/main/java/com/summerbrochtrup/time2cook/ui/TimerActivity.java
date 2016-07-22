@@ -22,23 +22,32 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private  final String TAG = getClass().getSimpleName();
     private Timer mTimer;
     private CountDownTimer mCountDownTimer;
-    private Button mStartPauseButton;
-    private Button mStopButton;
+    private Button mStartPauseButton, mStopButton;
     private ImageView mTimerImage;
+    private boolean timerStarted = false;
+    private long mMillisUntilFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         initializeView();
-        initializeTimer();
+        //initializeTimer();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startPauseButton:
-                mCountDownTimer.start();
+                if (!timerStarted) { //timer has not been started
+                    timerStarted = true;
+                    createCountDownTimer();
+                    mStartPauseButton.setText("PAUSE");
+                } else { //timer has been started. this click will pause
+                    timerStarted = false;
+                    mCountDownTimer.cancel();
+                    mStartPauseButton.setText("START");
+                }
                 break;
             case R.id.stopButton:
                 mCountDownTimer.cancel();
@@ -48,6 +57,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     private void initializeView() {
         mTimer = Parcels.unwrap(getIntent().getParcelableExtra(Constants.EXTRA_KEY_TIMER));
+        mMillisUntilFinished = mTimer.getTime();
         /* Bind views */
         mStartPauseButton = (Button) findViewById(R.id.startPauseButton);
         mStopButton = (Button) findViewById(R.id.stopButton);
@@ -73,16 +83,22 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeTimer() {
-        mCountDownTimer = new CountDownTimer(mTimer.getTime(), 1000) {
+
+    }
+
+    private void createCountDownTimer() {
+        mCountDownTimer = new CountDownTimer(mMillisUntilFinished, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                mMillisUntilFinished = millisUntilFinished;
                 Log.d(TAG, "tick " + millisUntilFinished);
             }
 
             @Override
             public void onFinish() {
+                mMillisUntilFinished = mTimer.getTime();
                 Log.d(TAG, "timer complete");
             }
-        };
+        }.start();
     }
 }
