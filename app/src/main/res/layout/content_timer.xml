@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -18,6 +19,29 @@
         android:background="@color/mint"
         android:src="@drawable/image"
         android:padding="14dp"/>
+
+    <at.grabner.circleprogress.CircleProgressView
+        android:id="@+id/circleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timerActivityImage"
+        android:layout_above="@+id/buttonLayout"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        CircleProgressView:cpv_value="10"
+        CircleProgressView:cpv_maxValue="100"
+        CircleProgressView:cpv_barColor="@color/dark_salmon"
+        CircleProgressView:cpv_rimColor="@color/mint"
+        CircleProgressView:cpv_textColor="@color/brown"
+        CircleProgressView:cpv_spinColor="@color/peach"
+        CircleProgressView:cpv_barWidth="35dp"
+        CircleProgressView:cpv_textMode="Text"
+        CircleProgressView:cpv_rimWidth="35dp"
+        CircleProgressView:cpv_contourSize="0dp"
+        CircleProgressView:cpv_autoTextSize="true"
+        CircleProgressView:cpv_unitScale="1"
+        CircleProgressView:cpv_textScale="1"
+        />
 
     <LinearLayout
         android:orientation="horizontal"
