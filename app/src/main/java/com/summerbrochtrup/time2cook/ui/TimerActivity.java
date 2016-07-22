@@ -3,6 +3,7 @@ package com.summerbrochtrup.time2cook.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -37,6 +38,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private CircleProgressView mCircleView;
     private Uri mUri = Uri.parse(Constants.URI_SYSTEM_RINGTONE);
     private MediaPlayer mPlayer;
+    private Typeface mFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mTimerImage.setImageResource(mTimer.getImage());
         mTimerImage.setBackgroundColor(Color.parseColor(mTimer.getImageBackgroundColor()));
         /* Set up CircleView */
+        mFont = Typeface.createFromAsset(getAssets(), "fonts/roboto.ttf");
+        mCircleView.setTextTypeface(mFont);
         mCircleView.setValue(mTimer.getTime());
         mCircleView.setTextSize(250);
         mCircleView.setUnitSize(40);

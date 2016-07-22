@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/image"/>
 
-    <TextView
+    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
