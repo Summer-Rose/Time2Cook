@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;
@@ -33,12 +34,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private CountDownTimer mCountDownTimer;
     private Button mStartPauseButton, mStopButton;
     private ImageView mTimerImage;
+    private TextView mTimeTextView;
     private boolean timerStarted = false;
     private long mMillisUntilFinished;
     private CircleProgressView mCircleView;
     private Uri mUri = Uri.parse(Constants.URI_SYSTEM_RINGTONE);
     private MediaPlayer mPlayer;
-    private Typeface mFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mStartPauseButton = (Button) findViewById(R.id.startPauseButton);
         mStopButton = (Button) findViewById(R.id.stopButton);
         mTimerImage = (ImageView) findViewById(R.id.timerActivityImage);
+        mTimeTextView = (TextView) findViewById(R.id.timeTextView);
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,13 +64,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setTitle(mTimer.getTimerName());
         mTimerImage.setImageResource(mTimer.getImage());
         mTimerImage.setBackgroundColor(Color.parseColor(mTimer.getImageBackgroundColor()));
-        /* Set up CircleView */
-        mFont = Typeface.createFromAsset(getAssets(), "fonts/roboto.ttf");
-        mCircleView.setTextTypeface(mFont);
-        mCircleView.setValue(mTimer.getTime());
-        mCircleView.setTextSize(250);
-        mCircleView.setUnitSize(40);
-        mCircleView.setShowTextWhileSpinning(true);
+        /* Set up CircleView and Timer */
         mCircleView.setMaxValue(mTimer.getTime() / 1000);
         updateTimer(mTimer.getTime());
         /* Set click listeners */
@@ -129,7 +125,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             public void onFinish() {
                 mMillisUntilFinished = mTimer.getTime();
                 mCircleView.setValue(0);
-                mCircleView.setText(getResources().getString(R.string.time_completed_text));
+                mTimeTextView.setText(getResources().getString(R.string.time_completed_text));
                 mStartPauseButton.setText(getResources().getString(R.string.button_start));
                 mPlayer.start();
             }
@@ -145,6 +141,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         if (seconds <= 9) {
             secondString = "0" + secondString;
         }
-        mCircleView.setText(Integer.toString(minutes) + ":" + secondString);
+        mTimeTextView.setText(Integer.toString(minutes) + ":" + secondString);
     }
 }

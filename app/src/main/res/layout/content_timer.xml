@@ -20,6 +20,19 @@
         android:src="@drawable/image"
         android:padding="14dp"/>
 
+    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/circleView"
+        android:layout_alignTop="@+id/circleView"
+        android:layout_alignLeft="@+id/circleView"
+        android:layout_alignRight="@+id/circleView"
+        android:textColor="@color/brown"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:text="0:00"/>
+
     <at.grabner.circleprogress.CircleProgressView
         android:id="@+id/circleView"
         android:layout_width="match_parent"
@@ -28,19 +41,15 @@
         android:layout_above="@+id/buttonLayout"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="14dp"
-        CircleProgressView:cpv_value="10"
-        CircleProgressView:cpv_maxValue="100"
         CircleProgressView:cpv_barColor="@color/dark_salmon"
         CircleProgressView:cpv_rimColor="@color/mint"
-        CircleProgressView:cpv_textColor="@color/brown"
         CircleProgressView:cpv_spinColor="@color/peach"
         CircleProgressView:cpv_barWidth="35dp"
-        CircleProgressView:cpv_textMode="Text"
         CircleProgressView:cpv_rimWidth="35dp"
+        CircleProgressView:cpv_textColor="#00000000"
+        CircleProgressView:cpv_unitColor="#00000000"
         CircleProgressView:cpv_contourSize="0dp"
-        CircleProgressView:cpv_autoTextSize="true"
         CircleProgressView:cpv_unitScale="1"
-        CircleProgressView:cpv_textScale="1"
         />
 
     <LinearLayout
