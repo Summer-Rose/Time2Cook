@@ -1,6 +1,10 @@
 package com.summerbrochtrup.time2cook.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +26,7 @@ import at.grabner.circleprogress.CircleProgressView;
 
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
     private  final String TAG = getClass().getSimpleName();
+    private final int REQUEST_CODE = 5;
     private Timer mTimer;
     private CountDownTimer mCountDownTimer;
     private Button mStartPauseButton, mStopButton;
@@ -29,6 +34,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private boolean timerStarted = false;
     private long mMillisUntilFinished;
     private CircleProgressView mCircleView;
+    private Uri mUri = Uri.parse("content://settings/system/ringtone");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +42,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_timer);
         initializeView();
         //initializeTimer();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.startPauseButton:
-                if (!timerStarted) { //timer has not been started
-                    timerStarted = true;
-                    createCountDownTimer();
-                    mStartPauseButton.setText("PAUSE");
-                } else { //timer has been started. this click will pause
-                    timerStarted = false;
-                    mCountDownTimer.cancel();
-                    mStartPauseButton.setText("START");
-                }
-                break;
-            case R.id.stopButton:
-                mCountDownTimer.cancel();
-                break;
-        }
     }
 
     private void initializeView() {
@@ -87,10 +73,44 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Timer Tone:");
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+                TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            if (uri != null) {
+                mUri = uri;
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.startPauseButton:
+                if (!timerStarted) { //timer has not been started
+                    timerStarted = true;
+                    createCountDownTimer();
+                    mStartPauseButton.setText("PAUSE");
+                } else { //timer has been started. this click will pause
+                    timerStarted = false;
+                    mCountDownTimer.cancel();
+                    mStartPauseButton.setText("START");
+                }
+                break;
+            case R.id.stopButton:
+                mCountDownTimer.cancel();
+                timerStarted = false;
+                break;
+        }
     }
 
     private void initializeTimer() {
