@@ -1,8 +1,11 @@
 package com.summerbrochtrup.time2cook.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by summerbrochtrup on 7/21/16.
  */
+@Parcel
 public class Timer {
     private String mTimerName;
     private String mImageBackgroundColor;
