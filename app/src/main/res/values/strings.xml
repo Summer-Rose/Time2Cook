@@ -2,4 +2,10 @@
     <string name="app_name">Time2Cook</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_timer">TimerActivity</string>
+
+    <string name="time_completed_text">Time 2 Eat!</string>
+    <string name="button_start">START</string>
+    <string name="button_pause">PAUSE</string>
+    <string name="button_stop">STOP</string>
+    <string name="ringtone_chooser_menu_title">Select Timer Tone:</string>
 </resources>
