@@ -14,10 +14,14 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/cream"
+            android:background="@color/dark_salmon"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -25,10 +29,11 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+        app:backgroundTint="@color/cream"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="top|right"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_music_note_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
