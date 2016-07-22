@@ -1,5 +1,6 @@
 package com.summerbrochtrup.time2cook.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,15 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.adapters.TimerGridAdapter;
 import com.summerbrochtrup.time2cook.models.Timer;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     ArrayList<Timer> mTimers = new ArrayList<>();
     private GridView mGridView;
     private TimerGridAdapter mAdapter;
@@ -40,5 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new TimerGridAdapter(this, mTimers);
         mGridView.setAdapter(mAdapter);
+        mGridView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, TimerActivity.class);
+        intent.putExtra(Constants.EXTRA_KEY_TIMER, Parcels.wrap(mTimers.get(position)));
+        startActivity(intent);
     }
 }
