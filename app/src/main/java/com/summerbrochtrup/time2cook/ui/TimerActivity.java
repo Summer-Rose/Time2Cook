@@ -18,6 +18,8 @@ import com.summerbrochtrup.time2cook.models.Timer;
 
 import org.parceler.Parcels;
 
+import at.grabner.circleprogress.CircleProgressView;
+
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
     private  final String TAG = getClass().getSimpleName();
     private Timer mTimer;
@@ -26,6 +28,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private ImageView mTimerImage;
     private boolean timerStarted = false;
     private long mMillisUntilFinished;
+    private CircleProgressView mCircleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +65,20 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mStartPauseButton = (Button) findViewById(R.id.startPauseButton);
         mStopButton = (Button) findViewById(R.id.stopButton);
         mTimerImage = (ImageView) findViewById(R.id.timerActivityImage);
+        mCircleView = (CircleProgressView) findViewById(R.id.circleView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /* Customize views */
         getSupportActionBar().setTitle(mTimer.getTimerName());
         mTimerImage.setImageResource(mTimer.getImage());
         mTimerImage.setBackgroundColor(Color.parseColor(mTimer.getImageBackgroundColor()));
+        /* Set up CircleView */
+        mCircleView.setValue(mTimer.getTime());
+        mCircleView.setTextSize(250);
+        mCircleView.setUnitSize(40);
+        mCircleView.setShowTextWhileSpinning(true);
+        mCircleView.setMaxValue(mTimer.getTime() / 1000);
+        updateTimer(mTimer.getTime());
         /* Set click listeners */
         mStartPauseButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
@@ -91,14 +102,29 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTick(long millisUntilFinished) {
                 mMillisUntilFinished = millisUntilFinished;
-                Log.d(TAG, "tick " + millisUntilFinished);
+                updateTimer(millisUntilFinished);
+                mCircleView.setValue(millisUntilFinished / 1000);
             }
 
             @Override
             public void onFinish() {
                 mMillisUntilFinished = mTimer.getTime();
-                Log.d(TAG, "timer complete");
+                mCircleView.setValue(0);
+                mCircleView.setText("Time 2 Eat!");
+                mStartPauseButton.setText("Start");
             }
         }.start();
+    }
+
+    private void updateTimer(long millisLeft) {
+        int secondsLeft = (int) millisLeft / 1000;
+        int minutes = secondsLeft / 60;
+        int seconds = secondsLeft - minutes * 60;
+
+        String secondString = Integer.toString(seconds);
+        if (seconds <= 9) {
+            secondString = "0" + secondString;
+        }
+        mCircleView.setText(Integer.toString(minutes) + ":" + secondString);
     }
 }
