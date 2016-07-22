@@ -3,6 +3,7 @@ package com.summerbrochtrup.time2cook.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private long mMillisUntilFinished;
     private CircleProgressView mCircleView;
     private Uri mUri = Uri.parse("content://settings/system/ringtone");
+    private MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mStopButton = (Button) findViewById(R.id.stopButton);
         mTimerImage = (ImageView) findViewById(R.id.timerActivityImage);
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /* Customize views */
@@ -68,18 +71,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         /* Set click listeners */
         mStartPauseButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
-        /* Set up FAB */
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Timer Tone:");
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
-                TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
+        fab.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +80,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
             if (uri != null) {
                 mUri = uri;
+                Log.d("uri", "set");
             }
         }
     }
@@ -109,7 +102,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             case R.id.stopButton:
                 mCountDownTimer.cancel();
                 timerStarted = false;
+                mPlayer.stop();
                 break;
+            case R.id.fab:
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Timer Tone:");
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+                TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
         }
     }
 
@@ -118,6 +118,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void createCountDownTimer() {
+        mPlayer = MediaPlayer.create(this, mUri);
         mCountDownTimer = new CountDownTimer(mMillisUntilFinished, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -132,6 +133,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 mCircleView.setValue(0);
                 mCircleView.setText("Time 2 Eat!");
                 mStartPauseButton.setText("Start");
+                mPlayer.start();
             }
         }.start();
     }
