@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.GridView;
 import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.adapters.TimerGridAdapter;
+import com.summerbrochtrup.time2cook.database.TimerDataSource;
 import com.summerbrochtrup.time2cook.models.Timer;
 
 import org.parceler.Parcels;
@@ -34,18 +36,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         mGridView = (GridView) findViewById(R.id.timersGrid);
 
-        mTimers.add(new Timer(R.drawable.image, "Brown Rice", "#99D1B7", "#F79273"));
-        mTimers.add(new Timer(R.drawable.image_two, "White Rice", "#B1654B", "#FDC08E"));
-        mTimers.add(new Timer(R.drawable.image, "Hard Boiled Egg", "#FDC08E", "#B1654B"));
-        mTimers.add(new Timer(R.drawable.image_two, "Quinoa", "#F79273", "#99D1B7"));
-        mTimers.add(new Timer(R.drawable.image, "Brown Rice", "#99D1B7", "#F79273"));
-        mTimers.add(new Timer(R.drawable.image_two, "White Rice", "#B1654B", "#FDC08E"));
-        mTimers.add(new Timer(R.drawable.image, "Hard Boiled Egg", "#FDC08E", "#B1654B"));
-        mTimers.add(new Timer(R.drawable.image_two, "Quinoa", "#F79273", "#99D1B7"));
-
-        mAdapter = new TimerGridAdapter(this, mTimers);
-        mGridView.setAdapter(mAdapter);
-        mGridView.setOnItemClickListener(this);
+        TimerDataSource dataSource = new TimerDataSource(this);
+//        dataSource.create(new Timer(1, "White Rice", R.drawable.image_two, 1100, "#B1654B", "#FDC08E"));
+//        dataSource.create(new Timer(1, "Hard Boiled Egg", R.drawable.image, 1100, "#FDC08E", "#B1654B"));
+//        dataSource.create(new Timer(1, "Quinoa", R.drawable.image_two, 1100, "#F79273", "#99D1B7"));
+//        dataSource.create(new Timer(1, "Brown Rice", R.drawable.image, 1100, "#99D1B7", "#F79273"));
     }
 
     @Override
@@ -53,5 +48,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent(this, TimerActivity.class);
         intent.putExtra(Constants.EXTRA_KEY_TIMER, Parcels.wrap(mTimers.get(position)));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TimerDataSource dataSource = new TimerDataSource(this);
+        mTimers = dataSource.readTimers();
+        mAdapter = new TimerGridAdapter(this, mTimers);
+        mGridView.setAdapter(mAdapter);
+        mGridView.setOnItemClickListener(this);
     }
 }
