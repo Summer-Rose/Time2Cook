@@ -7,6 +7,7 @@ import org.parceler.Parcel;
  */
 @Parcel
 public class Timer {
+    private int mId;
     private String mTimerName;
     private String mImageBackgroundColor;
     private String mTextBackgroundColor;
@@ -16,12 +17,13 @@ public class Timer {
     public Timer() {
     }
 
-    public Timer(int image, String timerName, String imageBackgroundColor, String textBackgroundColor) {
-        mImage = image;
+    public Timer(int id, String timerName, int image, int time, String imageBackgroundColor, String textBackgroundColor) {
+        mId = id;
         mTimerName = timerName;
+        mImage = image;
+        mTime = time;
         mImageBackgroundColor = imageBackgroundColor;
         mTextBackgroundColor = textBackgroundColor;
-        mTime = 11000;
     }
 
     public String getTimerName() {
@@ -42,5 +44,13 @@ public class Timer {
 
     public int getTime() {
         return mTime;
+    }
+
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 }
