@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mGridView = (GridView) findViewById(R.id.timersGrid);
 
         TimerDataSource dataSource = new TimerDataSource(this);
-//        dataSource.create(new Timer(1, "White Rice", R.drawable.image_two, 1100, "#B1654B", "#FDC08E"));
-//        dataSource.create(new Timer(1, "Hard Boiled Egg", R.drawable.image, 1100, "#FDC08E", "#B1654B"));
-//        dataSource.create(new Timer(1, "Quinoa", R.drawable.image_two, 1100, "#F79273", "#99D1B7"));
-//        dataSource.create(new Timer(1, "Brown Rice", R.drawable.image, 1100, "#99D1B7", "#F79273"));
+//        dataSource.create(new Timer(1, "White Rice", R.drawable.image_two, 11000, "#B1654B", "#FDC08E"));
+//        dataSource.create(new Timer(1, "Hard Boiled Egg", R.drawable.image, 11000, "#FDC08E", "#B1654B"));
+//        dataSource.create(new Timer(1, "Quinoa", R.drawable.image_two, 11000, "#F79273", "#99D1B7"));
+//        dataSource.create(new Timer(1, "Brown Rice", R.drawable.image, 11000, "#99D1B7", "#F79273"));
     }
 
     @Override
