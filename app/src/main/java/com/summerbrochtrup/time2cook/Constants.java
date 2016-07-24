@@ -5,5 +5,6 @@ package com.summerbrochtrup.time2cook;
  */
 public class Constants {
     public static final String EXTRA_KEY_TIMER = "timer";
+    public static final String EXTRA_KEY_URI = "uri";
     public static final String URI_SYSTEM_RINGTONE = "content://settings/system/ringtone";
 }
