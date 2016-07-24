@@ -1,8 +1,6 @@
 package com.summerbrochtrup.time2cook.ui;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +12,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -30,9 +26,7 @@ import com.summerbrochtrup.time2cook.models.Timer;
 import com.summerbrochtrup.time2cook.service.TimerService;
 
 import org.parceler.Parcels;
-
 import java.io.IOException;
-
 import at.grabner.circleprogress.CircleProgressView;
 
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -136,14 +130,18 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.stopButton:
-                if (mBound && mTimerService.isPlaying()) {
-                    mTimerService.stop();
+                mCountDownTimer.cancel();
+                if (mBound) {
+                    if (mTimerService.isPlaying()) {
+                        mTimerService.stop();
+                    }
+                    mTimerService.cancelNotification();
                     unbindService(mServiceConnection);
                     mBound = false;
                 }
-                mCountDownTimer.cancel();
-                timerCounting = false;
                 updateTimer(mTimer.getTime());
+                mCircleView.setValue(mTimer.getTime() / 1000);
+                timerCounting = false;
                 break;
             case R.id.fab:
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
@@ -186,28 +184,11 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         if (seconds <= 9) {
             secondString = "0" + secondString;
         }
-        mTimeTextView.setText(Integer.toString(minutes) + ":" + secondString);
-    }
-
-    private void showNotification() {
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(android.R.drawable.alert_dark_frame)
-                        .setContentTitle("Time2Cook")
-                        .setContentText("Time remaining: ")
-                        .setTicker("this is the ticker");
-
-        Intent intent = new Intent(this, TimerActivity.class);
-        intent.putExtra(Constants.EXTRA_KEY_TIMER, Parcels.wrap(mTimer));
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(pendingIntent);
-
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, mBuilder.build());
+        String formattedTime = Integer.toString(minutes) + ":" + secondString;
+        mTimeTextView.setText(formattedTime);
+        if (mBound) {
+            mTimerService.createNotification("Time remaining : " + formattedTime);
+        }
     }
 
     @Override
