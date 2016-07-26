@@ -14,14 +14,16 @@ public class TimerSQLiteHelper extends SQLiteOpenHelper {
     public static final String TIMERS_TABLE = "TIMERS";
     public static final String COLUMN_TIMER_NAME = "NAME";
     public static final String COLUMN_IMAGE = "IMAGE";
+    public static final String COLUMN_TIME = "TIME";
+    public static final String COLUMN_DIRECTIONS = "DIRECTIONS";
     public static final String COLUMN_BACKGROUND_COLOR = "BACKGROUND_COLOR";
     public static final String COLUMN_TEXT_COLOR = "TEXT_COLOR";
-    public static final String COLUMN_TIME = "TIME";
     private static String CREATE_TIMERS = "CREATE TABLE " + TIMERS_TABLE
             + "(" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_TIMER_NAME + " TEXT, "
             + COLUMN_IMAGE + " INTEGER, "
             + COLUMN_TIME + " INTEGER, "
+            + COLUMN_DIRECTIONS + " TEXT, "
             + COLUMN_BACKGROUND_COLOR + " TEXT, "
             + COLUMN_TEXT_COLOR + " TEXT)";
 
@@ -37,6 +39,5 @@ public class TimerSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }

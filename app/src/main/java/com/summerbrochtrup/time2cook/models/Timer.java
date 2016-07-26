@@ -9,33 +9,31 @@ import org.parceler.Parcel;
 public class Timer {
     private int mId;
     private String mTimerName;
-    private String mImageBackgroundColor;
-    private String mTextBackgroundColor;
     private int mImage;
     private int mTime;
+    private String mDirections;
+    private String mImageBackgroundColor;
+    private String mTextBackgroundColor;
 
-    public Timer() {
-    }
+    public Timer() {}
 
-    public Timer(int id, String timerName, int image, int time, String imageBackgroundColor, String textBackgroundColor) {
+    public Timer(int id, String timerName, int image, int time, String directions, String imageBackgroundColor, String textBackgroundColor) {
         mId = id;
         mTimerName = timerName;
         mImage = image;
         mTime = time;
+        mDirections = directions;
         mImageBackgroundColor = imageBackgroundColor;
         mTextBackgroundColor = textBackgroundColor;
     }
 
+
+    public int getId() {
+        return mId;
+    }
+
     public String getTimerName() {
         return mTimerName;
-    }
-
-    public String getImageBackgroundColor() {
-        return mImageBackgroundColor;
-    }
-
-    public String getTextBackgroundColor() {
-        return mTextBackgroundColor;
     }
 
     public int getImage() {
@@ -46,11 +44,16 @@ public class Timer {
         return mTime;
     }
 
-    public int getmId() {
-        return mId;
+    public String getDirections() {
+        return mDirections;
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public String getImageBackgroundColor() {
+        return mImageBackgroundColor;
+    }
+
+    public String getTextBackgroundColor() {
+        return mTextBackgroundColor;
     }
 }
+

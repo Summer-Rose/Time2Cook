@@ -36,11 +36,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         mGridView = (GridView) findViewById(R.id.timersGrid);
 
-        TimerDataSource dataSource = new TimerDataSource(this);
-//        dataSource.create(new Timer(1, "White Rice", R.drawable.image_two, 11000, "#B1654B", "#FDC08E"));
-//        dataSource.create(new Timer(1, "Hard Boiled Egg", R.drawable.image, 11000, "#FDC08E", "#B1654B"));
-//        dataSource.create(new Timer(1, "Quinoa", R.drawable.image_two, 11000, "#F79273", "#99D1B7"));
-//        dataSource.create(new Timer(1, "Brown Rice", R.drawable.image, 11000, "#99D1B7", "#F79273"));
+//        TimerDataSource dataSource = new TimerDataSource(this);
+//        dataSource.create(new Timer(1, "White Rice", R.drawable.image_two, 1080000,
+//                "Use 2 cups of water for each cup of white rice. Bring the water to a boil. " +
+//                        "Add rice and a dash of salt. Cover the rice and reduce the heat to low. " +
+//                        "When finished, turn off the heat and let stand for a few minutes before serving.",
+//                "#B1654B", "#FDC08E"));
+//        dataSource.create(new Timer(1, "Hard Boiled Egg", R.drawable.image, 11000,
+//                "step one." +
+//                        "step two.",
+//                "#FDC08E", "#B1654B"));
+//        dataSource.create(new Timer(1, "Quinoa", R.drawable.image_two, 11000,
+//                "step one." +
+//                        "step two.",
+//                "#F79273", "#99D1B7"));
+//        dataSource.create(new Timer(1, "Brown Rice", R.drawable.image, 11000,
+//                "step one." +
+//                        "step two.",
+//                "#99D1B7", "#F79273"));
     }
 
     @Override

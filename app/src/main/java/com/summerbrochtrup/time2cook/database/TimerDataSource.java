@@ -40,6 +40,7 @@ public class TimerDataSource {
         timerValues.put(TimerSQLiteHelper.COLUMN_TIMER_NAME, timer.getTimerName());
         timerValues.put(TimerSQLiteHelper.COLUMN_IMAGE, timer.getImage());
         timerValues.put(TimerSQLiteHelper.COLUMN_TIME, timer.getTime());
+        timerValues.put(TimerSQLiteHelper.COLUMN_DIRECTIONS, timer.getDirections());
         timerValues.put(TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR, timer.getImageBackgroundColor());
         timerValues.put(TimerSQLiteHelper.COLUMN_TEXT_COLOR, timer.getTextBackgroundColor());
         long timerID = database.insert(TimerSQLiteHelper.TIMERS_TABLE, null, timerValues);
@@ -58,6 +59,7 @@ public class TimerDataSource {
                         TimerSQLiteHelper.COLUMN_TIMER_NAME,
                         TimerSQLiteHelper.COLUMN_IMAGE,
                         TimerSQLiteHelper.COLUMN_TIME,
+                        TimerSQLiteHelper.COLUMN_DIRECTIONS,
                         TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR,
                         TimerSQLiteHelper.COLUMN_TEXT_COLOR },
                 null, //Selection
@@ -67,19 +69,17 @@ public class TimerDataSource {
                 null); //order
         ArrayList<Timer> timers = new ArrayList<>();
         if (cursor.moveToFirst()) {
-            Log.d("cursor", "move to first");
             do {
-                Log.d("cursor", "inside do");
                 Timer timer = new Timer(getIntFromColumnName(cursor, BaseColumns._ID),
                         getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TIMER_NAME),
                         getIntFromColumnName(cursor, TimerSQLiteHelper.COLUMN_IMAGE),
                         getIntFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TIME),
+                        getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_DIRECTIONS),
                         getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR),
                         getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TEXT_COLOR));
                 timers.add(timer);
             } while(cursor.moveToNext());
         }
-        Log.d("cursor", "done");
         cursor.close();
         close(database);
         return timers;
