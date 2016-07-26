@@ -11,10 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,6 +68,31 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         initializeView();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_timer_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_directions:
+                return true;
+            case R.id.action_select_tone:
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getResources().getString(R.string.ringtone_chooser_menu_title));
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
+                TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
+                return true;
+            case R.id.action_edit_timer:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void initializeView() {
         mTimer = Parcels.unwrap(getIntent().getParcelableExtra(Constants.EXTRA_KEY_TIMER));
         mMillisUntilFinished = (long) mTimer.getTime();
@@ -76,7 +102,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mTimerImage = (ImageView) findViewById(R.id.timerActivityImage);
         mTimeTextView = (TextView) findViewById(R.id.timeTextView);
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /* Customize views */
@@ -90,7 +115,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         /* Set click listeners */
         mStartPauseButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
-        fab.setOnClickListener(this);
     }
 
     @Override
@@ -143,12 +167,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 mCircleView.setValue(mTimer.getTime() / 1000);
                 timerCounting = false;
                 break;
-            case R.id.fab:
-                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getResources().getString(R.string.ringtone_chooser_menu_title));
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) null);
-                TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
         }
     }
 

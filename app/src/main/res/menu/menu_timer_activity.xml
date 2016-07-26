@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
+    <item
+        android:id="@+id/action_select_tone"
+        android:icon="@drawable/ic_music_note_cream_24dp"
+        app:showAsAction="always"
+        android:title="Select Tone" />
+    <item
+        android:id="@+id/action_view_directions"
+        android:icon="@drawable/ic_format_list_bulleted_cream_24dp"
+        app:showAsAction="always"
+        android:title="View Directions" />
+    <item
+        android:id="@+id/action_edit_timer"
+        android:icon="@drawable/ic_mode_edit_cream_24dp"
+        app:showAsAction="always"
+        android:title="Edit Timer" />
+</menu>
