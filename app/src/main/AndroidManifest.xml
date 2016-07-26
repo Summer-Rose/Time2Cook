@@ -23,9 +23,11 @@
         <activity
             android:name=".ui.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/AppTheme">
-        </activity>
-        <service android:name=".service.TimerService"/>
+            android:theme="@style/AppTheme"></activity>
+
+        <service android:name=".service.TimerService" />
+
+        <activity android:name=".ui.AddTimerActivity"></activity>
     </application>
 
 </manifest>
