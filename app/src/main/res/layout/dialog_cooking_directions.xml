@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mint"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+            android:id="@+id/dialogTitle"
+            android:textAlignment="center"
+            android:textColor="@color/cream"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Brown Rice Cooking Directions"/>
+
+        <ImageView
+            android:id="@+id/dismissDialogIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignRight="@+id/dialogTitle"
+            android:layout_alignTop="@+id/dialogTitle"
+            android:src="@drawable/ic_close_dark_salmon_24dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"/>
+
+</LinearLayout>

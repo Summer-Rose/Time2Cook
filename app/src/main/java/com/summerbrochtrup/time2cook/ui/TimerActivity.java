@@ -1,6 +1,7 @@
 package com.summerbrochtrup.time2cook.ui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -23,11 +26,14 @@ import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;
+import com.summerbrochtrup.time2cook.adapters.DirectionsListAdapter;
 import com.summerbrochtrup.time2cook.models.Timer;
 import com.summerbrochtrup.time2cook.service.TimerService;
 
 import org.parceler.Parcels;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import at.grabner.circleprogress.CircleProgressView;
 
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -78,6 +84,25 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_view_directions:
+                final Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.dialog_cooking_directions);
+                dialog.setTitle("Cooking Directions");
+                RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerView);
+                DirectionsListAdapter adapter = new DirectionsListAdapter(getDirections());
+                RecyclerView.LayoutManager layoutManager =
+                        new LinearLayoutManager(this);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setAdapter(adapter);
+
+                ImageView closeDialogButton = (ImageView) dialog.findViewById(R.id.dismissDialogIcon);
+                closeDialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
                 return true;
             case R.id.action_select_tone:
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
@@ -91,6 +116,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private ArrayList<String> getDirections() {
+        ArrayList<String> directions = new ArrayList<>();
+        for (String direction : mTimer.getDirections().split("\\.")) {
+            directions.add(direction);
+        }
+        return directions;
     }
 
     private void initializeView() {
