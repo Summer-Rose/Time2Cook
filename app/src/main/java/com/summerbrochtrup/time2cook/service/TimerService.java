@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;

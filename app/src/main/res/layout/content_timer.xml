@@ -20,19 +20,6 @@
         android:src="@drawable/image"
         android:padding="14dp"/>
 
-    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/circleView"
-        android:layout_alignTop="@+id/circleView"
-        android:layout_alignLeft="@+id/circleView"
-        android:layout_alignRight="@+id/circleView"
-        android:textColor="@color/brown"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:text="0:00"/>
-
     <at.grabner.circleprogress.CircleProgressView
         android:id="@+id/circleView"
         android:layout_width="match_parent"
@@ -51,6 +38,19 @@
         CircleProgressView:cpv_contourSize="0dp"
         CircleProgressView:cpv_unitScale="1"
         />
+
+    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/circleView"
+        android:layout_alignTop="@+id/circleView"
+        android:layout_alignLeft="@+id/circleView"
+        android:layout_alignRight="@+id/circleView"
+        android:textColor="@color/brown"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:text="0:00" />
 
     <LinearLayout
         android:orientation="horizontal"
