@@ -12,8 +12,7 @@
 
 ---
 
-[![main-activity](imageurl)](playstoreurl) [![timer-activity](imageurl)](playstoreurl) [![add-timer](imageurl)](playstoreurl)
-
+![main-activity](//dl.dropboxusercontent.com/s/6tf1iyynwub737a/main_activity.png) ![timer-activity](//dl.dropboxusercontent.com/s/pf0iuqcwlfmv92n/timer_activity.png) ![add-timer](//dl.dropboxusercontent.com/s/kaza8eoors9nw50/cooking_directions.png)
 
 Time2Cook is a timer application that stores the cooking time and basic cooking directions for the foods you eat most often. With Time2Cook there is no need to Google “time to cook brown rice” or “water to quinoa ratio”. Instead, you simply select the timer for the food you are cooking and click to view cooking directions or to begin the timer.
 
