@@ -2,6 +2,7 @@ package com.summerbrochtrup.time2cook.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.models.Timer;
+import com.summerbrochtrup.time2cook.util.StyleIndexHelper;
 
 import java.util.ArrayList;
 
@@ -55,9 +57,10 @@ public class TimerGridAdapter extends BaseAdapter {
             holder = (TimerGridViewHolder) convertView.getTag();
         }
         holder.timerNameTextView.setText(timer.getTimerName());
-        holder.timerNameTextView.setBackgroundColor(Color.parseColor(timer.getTextBackgroundColor()));
-        holder.timerImage.setImageResource(timer.getImage());
-        holder.timerImage.setBackgroundColor(Color.parseColor(timer.getImageBackgroundColor()));
+
+        StyleIndexHelper styleHelper = new StyleIndexHelper(mContext);
+        styleHelper.styleImageView(holder.timerImage, mTimers.get(position).getStyleIndex());
+        styleHelper.styleTextView(holder.timerNameTextView, mTimers.get(position).getStyleIndex());
         return convertView;
     }
 

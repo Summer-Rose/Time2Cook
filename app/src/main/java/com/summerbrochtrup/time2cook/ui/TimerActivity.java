@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.adapters.DirectionsListAdapter;
 import com.summerbrochtrup.time2cook.models.Timer;
 import com.summerbrochtrup.time2cook.service.TimerService;
+import com.summerbrochtrup.time2cook.util.StyleIndexHelper;
 
 import org.parceler.Parcels;
 import java.io.IOException;
@@ -138,11 +138,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         /* Customize views */
+        StyleIndexHelper styleHelper = new StyleIndexHelper(this);
+        styleHelper.styleImageView(mTimerImage, mTimer.getStyleIndex());
         getSupportActionBar().setTitle(mTimer.getTimerName());
-        mTimerImage.setImageResource(mTimer.getImage());
-        mTimerImage.setBackgroundColor(Color.parseColor(mTimer.getImageBackgroundColor()));
         /* Set up CircleView and Timer */
         mCircleView.setMaxValue(mTimer.getTime() / 1000);
+        mCircleView.setValue(mTimer.getTime() / 1000);
         updateTimer(mMillisUntilFinished);
         Log.d("millis", mMillisUntilFinished + "");
         /* Set click listeners */
