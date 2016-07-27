@@ -18,4 +18,8 @@
         <item name="colorControlHighlight">@color/brown</item>
     </style>
 
+    <style name="HintText">
+        <item name="android:textSize">0dp</item>
+    </style>
+
 </resources>
