@@ -38,11 +38,9 @@ public class TimerDataSource {
         database.beginTransaction();
         ContentValues timerValues = new ContentValues();
         timerValues.put(TimerSQLiteHelper.COLUMN_TIMER_NAME, timer.getTimerName());
-        timerValues.put(TimerSQLiteHelper.COLUMN_IMAGE, timer.getImage());
         timerValues.put(TimerSQLiteHelper.COLUMN_TIME, timer.getTime());
         timerValues.put(TimerSQLiteHelper.COLUMN_DIRECTIONS, timer.getDirections());
-        timerValues.put(TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR, timer.getImageBackgroundColor());
-        timerValues.put(TimerSQLiteHelper.COLUMN_TEXT_COLOR, timer.getTextBackgroundColor());
+        timerValues.put(TimerSQLiteHelper.COLUMN_STYLE_INDEX, timer.getStyleIndex());
         long timerID = database.insert(TimerSQLiteHelper.TIMERS_TABLE, null, timerValues);
 
         database.setTransactionSuccessful();
@@ -57,11 +55,10 @@ public class TimerDataSource {
                 new String [] {
                         BaseColumns._ID,
                         TimerSQLiteHelper.COLUMN_TIMER_NAME,
-                        TimerSQLiteHelper.COLUMN_IMAGE,
                         TimerSQLiteHelper.COLUMN_TIME,
                         TimerSQLiteHelper.COLUMN_DIRECTIONS,
-                        TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR,
-                        TimerSQLiteHelper.COLUMN_TEXT_COLOR },
+                        TimerSQLiteHelper.COLUMN_STYLE_INDEX
+                },
                 null, //Selection
                 null, //selection args
                 null, //group by
@@ -72,11 +69,10 @@ public class TimerDataSource {
             do {
                 Timer timer = new Timer(getIntFromColumnName(cursor, BaseColumns._ID),
                         getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TIMER_NAME),
-                        getIntFromColumnName(cursor, TimerSQLiteHelper.COLUMN_IMAGE),
                         getIntFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TIME),
                         getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_DIRECTIONS),
-                        getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_BACKGROUND_COLOR),
-                        getStringFromColumnName(cursor, TimerSQLiteHelper.COLUMN_TEXT_COLOR));
+                        getIntFromColumnName(cursor, TimerSQLiteHelper.COLUMN_STYLE_INDEX)
+                );
                 timers.add(timer);
             } while(cursor.moveToNext());
         }
@@ -93,5 +89,19 @@ public class TimerDataSource {
     private String getStringFromColumnName(Cursor cursor, String columnName) {
         int columnIndex = cursor.getColumnIndex(columnName);
         return cursor.getString(columnIndex);
+    }
+
+    public int getLastStyleIndex() {
+        int styleIndex = 0;
+        SQLiteDatabase db = open();
+        Cursor cursor = db.query(TimerSQLiteHelper.TIMERS_TABLE, new String[] {TimerSQLiteHelper.COLUMN_STYLE_INDEX}, null, null, null, null, null);
+
+        if (cursor.moveToLast()) {
+            styleIndex = cursor.getInt(0);
+        }
+
+        cursor.close();
+        db.close();
+        return styleIndex;
     }
 }
