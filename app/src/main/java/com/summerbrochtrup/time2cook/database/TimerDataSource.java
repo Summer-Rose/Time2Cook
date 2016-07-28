@@ -81,6 +81,37 @@ public class TimerDataSource {
         return timers;
     }
 
+    public void update(Timer timer) {
+        SQLiteDatabase database = open();
+        database.beginTransaction();
+        ContentValues updateTimerValues = new ContentValues();
+        updateTimerValues.put(TimerSQLiteHelper.COLUMN_TIMER_NAME, timer.getTimerName());
+        updateTimerValues.put(TimerSQLiteHelper.COLUMN_TIME, timer.getTime());
+        updateTimerValues.put(TimerSQLiteHelper.COLUMN_DIRECTIONS, timer.getDirections());
+        database.update(TimerSQLiteHelper.TIMERS_TABLE,
+                updateTimerValues,
+                String.format("%s=%d", BaseColumns._ID, timer.getId()),
+                null);
+        database.setTransactionSuccessful();
+        database.endTransaction();
+        close(database);
+    }
+
+    public void delete(int timerId) {
+        SQLiteDatabase database = open();
+        database.beginTransaction();
+        database.delete(TimerSQLiteHelper.TIMERS_TABLE,
+                "_Id=" + timerId,
+                null);
+        database.setTransactionSuccessful();
+        database.endTransaction();
+        //close(database);
+    }
+
+    public void updateStyleIds() {
+
+    }
+
     private int getIntFromColumnName(Cursor cursor, String columnName) {
         int columnIndex = cursor.getColumnIndex(columnName);
         return cursor.getInt(columnIndex);
@@ -95,11 +126,9 @@ public class TimerDataSource {
         int styleIndex = 0;
         SQLiteDatabase db = open();
         Cursor cursor = db.query(TimerSQLiteHelper.TIMERS_TABLE, new String[] {TimerSQLiteHelper.COLUMN_STYLE_INDEX}, null, null, null, null, null);
-
         if (cursor.moveToLast()) {
             styleIndex = cursor.getInt(0);
         }
-
         cursor.close();
         db.close();
         return styleIndex;
