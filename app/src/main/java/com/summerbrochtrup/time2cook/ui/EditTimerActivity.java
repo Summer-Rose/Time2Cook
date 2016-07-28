@@ -58,7 +58,8 @@ public class EditTimerActivity extends AppCompatActivity implements View.OnClick
                 if (!areGoodInputs) break;
                 updateTimerInDatabase(name, milliseconds, directions);
                 newTimerComplete = true;
-                makeDialog("Success!", "Your timer, " + name + ", was updated!");
+                makeDialog(getResources().getString(R.string.success_title),
+                        String.format(getResources().getString(R.string.update_success_message), name));
                 mDialog.setCancelable(false);
                 break;
             case R.id.dismissDialogIcon:
@@ -88,10 +89,12 @@ public class EditTimerActivity extends AppCompatActivity implements View.OnClick
 
     private boolean verifyInputs(String name, int milliseconds) {
         if (name.equals("")) {
-            makeDialog("Uh oh!", "Please give your timer a name");
+            makeDialog(getResources().getString(R.string.add_timer_error_title),
+                    getResources().getString(R.string.error_message_no_name));
             return false;
         } else if (milliseconds == 0) {
-            makeDialog("Uh oh!", "Please give your timer a duration");
+            makeDialog(getResources().getString(R.string.add_timer_error_title),
+                    getResources().getString(R.string.error_message_no_time));
             return false;
         } else {
             return true;

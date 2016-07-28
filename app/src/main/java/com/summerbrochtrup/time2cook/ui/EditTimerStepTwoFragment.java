@@ -64,6 +64,7 @@ public class EditTimerStepTwoFragment extends Fragment implements View.OnClickLi
         switch (view.getId()) {
             case R.id.addDirectionButton:
                 String direction = mAddDirectionEditText.getText().toString();
+                mAddDirectionEditText.setText("");
                 mAdapter.addDirection(direction);
                 mAdapter.notifyItemInserted(mAdapter.getItemCount());
                 break;

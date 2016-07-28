@@ -111,7 +111,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
                 return true;
             case R.id.action_edit_timer:
-                Log.d("directions", mTimer.getDirections() + "?");
                 Intent editIntent = new Intent(this, EditTimerActivity.class);
                 editIntent.putExtra(Constants.EXTRA_KEY_TIMER,  Parcels.wrap(mTimer));
                 startActivity(editIntent);
@@ -124,7 +123,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private ArrayList<String> getDirections() {
         ArrayList<String> directions = new ArrayList<>();
         if (mTimer.getDirections().equals("")) {
-            directions.add("No directions added");
+            directions.add(getResources().getString(R.string.no_directions_default));
         } else {
             for (String direction : mTimer.getDirections().split("\\.")) {
                 directions.add(direction);

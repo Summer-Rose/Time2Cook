@@ -81,7 +81,7 @@ public class EditTimerStepOneFragment extends Fragment implements View.OnClickLi
     }
 
     public String getTimerName() {
-        return mTimerNameEditText.getText().toString();
+        return mTimerNameEditText.getText().toString().trim();
     }
 
     public long getMilliseconds() {
