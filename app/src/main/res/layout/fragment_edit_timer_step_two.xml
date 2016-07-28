@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.AddTimerActivity"
+    tools:showIn="@layout/activity_add_timer">
+
+    <ImageView
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_edit_dark_salmon_24dp" />
+
+    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+        android:id="@+id/addTimerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Timer | Step Two"
+        android:textColor="@color/dark_salmon"
+        android:textSize="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center" />
+
+    <RelativeLayout
+        android:id="@+id/formTwoLayout"
+        android:padding="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mint">
+
+        <LinearLayout
+            android:id="@+id/addDirectionLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/timerDirectionTil"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:hintTextAppearance="@style/HintText">
+
+                <EditText
+                    android:id="@+id/directionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/cream"
+                    android:hint="Add cooking instructions"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/dark_salmon"
+                    android:textColorHint="#cccccc"
+                    android:padding="10dp"
+                    android:textSize="20sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/addDirectionButton"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_add_peach_24dp"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/directionsRecyclerView"
+            android:layout_below="@+id/addDirectionLayout"
+            android:layout_above="@+id/backStepButton"
+            android:layout_width="match_parent"
+            android:background="@drawable/number_picker_background"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/backStepButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center"
+            android:scaleX="-1"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_action_ic_navigate_next_salmon_24dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
