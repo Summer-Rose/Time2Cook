@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.R;
-import com.summerbrochtrup.time2cook.adapters.AddTimerPagerAdapter;
+import com.summerbrochtrup.time2cook.adapters.TimerInputPagerAdapter;
 import com.summerbrochtrup.time2cook.database.TimerDataSource;
 import com.summerbrochtrup.time2cook.models.Timer;
 
@@ -21,7 +21,7 @@ import java.util.List;
 
 
 public class AddTimerActivity extends AppCompatActivity implements View.OnClickListener {
-    private AddTimerPagerAdapter mAdapterViewPager;
+    private TimerInputPagerAdapter mAdapterViewPager;
     private Button mSubmitTimerButton;
     private ViewPager mViewPager;
     private Dialog mDialog;
@@ -35,7 +35,7 @@ public class AddTimerActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
         mSubmitTimerButton = (Button) findViewById(R.id.submitTimerButton);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        mAdapterViewPager = new AddTimerPagerAdapter(getSupportFragmentManager());
+        mAdapterViewPager = new TimerInputPagerAdapter(getSupportFragmentManager(), this);
         mViewPager.setAdapter(mAdapterViewPager);
         mSubmitTimerButton.setOnClickListener(this);
     }

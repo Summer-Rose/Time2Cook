@@ -86,7 +86,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             case R.id.action_view_directions:
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_cooking_directions);
-                dialog.setTitle("Cooking Directions");
                 RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerView);
                 DirectionsListAdapter adapter = new DirectionsListAdapter(getDirections());
                 RecyclerView.LayoutManager layoutManager =
@@ -112,6 +111,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 TimerActivity.this.startActivityForResult(intent, REQUEST_CODE);
                 return true;
             case R.id.action_edit_timer:
+                Log.d("directions", mTimer.getDirections() + "?");
+                Intent editIntent = new Intent(this, EditTimerActivity.class);
+                editIntent.putExtra(Constants.EXTRA_KEY_TIMER,  Parcels.wrap(mTimer));
+                startActivity(editIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
