@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,6 +51,9 @@ public class AddTimerActivity extends AppCompatActivity implements View.OnClickL
                 String name = stepOneFrag.getTimerName();
                 int milliseconds = (int) stepOneFrag.getMilliseconds();
                 String directions = stepTwoFragment.getDirections();
+                if (directions.equals("")) {
+                    directions = "none";
+                }
                 boolean areGoodInputs = verifyInputs(name, milliseconds);
                 if (!areGoodInputs) break;
                 saveTimerToDatabase(name, milliseconds, directions);

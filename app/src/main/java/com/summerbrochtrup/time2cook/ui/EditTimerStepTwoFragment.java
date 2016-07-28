@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,13 @@ public class EditTimerStepTwoFragment extends Fragment implements View.OnClickLi
         mAddDirectionButton = (ImageView) view.findViewById(R.id.addDirectionButton);
         mBackButton = (ImageView) view.findViewById(R.id.backStepButton);
         mRecylerView = (RecyclerView) view.findViewById(R.id.directionsRecyclerView);
-        mAdapter = new DirectionsListAdapter(mDirections);
+
+        if (mTimer.getDirections().equals("none")) {
+            mDirections = null;
+            mAdapter = new DirectionsListAdapter(new ArrayList<String>());
+        } else {
+            mAdapter = new DirectionsListAdapter(directionsToArray());
+        }
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -63,10 +70,12 @@ public class EditTimerStepTwoFragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addDirectionButton:
-                String direction = mAddDirectionEditText.getText().toString();
-                mAddDirectionEditText.setText("");
-                mAdapter.addDirection(direction);
-                mAdapter.notifyItemInserted(mAdapter.getItemCount());
+                String direction = mAddDirectionEditText.getText().toString().trim();
+                if (!direction.equals("")) {
+                    mAddDirectionEditText.setText("");
+                    mAdapter.addDirection(direction);
+                    mAdapter.notifyItemInserted(mAdapter.getItemCount());
+                }
                 break;
             case R.id.backStepButton:
                 ((EditTimerActivity) getActivity()).setCurrentItem (0, true);
