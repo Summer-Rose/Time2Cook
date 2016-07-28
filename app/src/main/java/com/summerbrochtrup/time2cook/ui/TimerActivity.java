@@ -120,8 +120,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     private ArrayList<String> getDirections() {
         ArrayList<String> directions = new ArrayList<>();
-        for (String direction : mTimer.getDirections().split("\\.")) {
-            directions.add(direction);
+        if (mTimer.getDirections().equals("")) {
+            directions.add("No directions added");
+        } else {
+            for (String direction : mTimer.getDirections().split("\\.")) {
+                directions.add(direction);
+            }
         }
         return directions;
     }
@@ -145,7 +149,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mCircleView.setMaxValue(mTimer.getTime() / 1000);
         mCircleView.setValue(mTimer.getTime() / 1000);
         updateTimer(mMillisUntilFinished);
-        Log.d("millis", mMillisUntilFinished + "");
         /* Set click listeners */
         mStartPauseButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
