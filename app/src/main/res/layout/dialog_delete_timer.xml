@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cream"
+    android:padding="15dp">
+
+    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/messageTextView"
+        android:text="Are you sure you want to delete this timer?"
+        android:textSize="30dp"
+        android:textColor="@color/dark_salmon"
+        android:padding="10dp"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_below="@+id/messageTextView">
+
+        <com.summerbrochtrup.time2cook.fonts.RobotoFontButton
+            android:id="@+id/confirmDeleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mint"
+            android:layout_weight="1"
+            android:text="I'm Sure"
+            android:textSize="20sp"
+            android:textColor="@color/cream"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginRight="2dp"/>
+
+        <com.summerbrochtrup.time2cook.fonts.RobotoFontButton
+            android:id="@+id/dismissDialogButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_salmon"
+            android:layout_weight="1"
+            android:text="Nevermind"
+            android:textColor="@color/cream"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginLeft="2dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
