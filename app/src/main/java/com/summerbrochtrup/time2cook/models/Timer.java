@@ -32,12 +32,24 @@ public class Timer {
         return mTimerName;
     }
 
+    public void setTimerName(String name) {
+        mTimerName = name;
+    }
+
     public int getTime() {
         return mTime;
     }
 
+    public void setTime(int time) {
+        mTime = time;
+    }
+
     public String getDirections() {
         return mDirections;
+    }
+
+    public void setDirections(String directions) {
+        mDirections = directions;
     }
 
     public int getStyleIndex() {
