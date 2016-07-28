@@ -51,5 +51,13 @@ public class DirectionsListAdapter extends RecyclerView.Adapter<DirectionsListAd
             mDirectionTextView.setText(direction);
         }
     }
+
+    public void addDirection(String direction) {
+        mDirections.add(direction);
+    }
+
+    public ArrayList<String> getDirections() {
+        return mDirections;
+    }
 }
 
