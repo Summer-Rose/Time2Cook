@@ -1,7 +1,9 @@
 package com.summerbrochtrup.time2cook.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,25 +34,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean isFirstUse = checkIfFirstUse();
+        if (isFirstUse) { createDatabase(); }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mGridView = (GridView) findViewById(R.id.timersGrid);
-
-//        TimerDataSource dataSource = new TimerDataSource(this);
-//        dataSource.create(new Timer(1, "White Rice", 1080000,
-//                "Use 2 cups of water for each cup of white rice. Bring the water to a boil. " +
-//                        "Add rice and a dash of salt. Cover the rice and reduce the heat to low. " +
-//                        "When finished, turn off the heat and let stand for a few minutes before serving.", 0));
-//        dataSource.create(new Timer(1, "Hard Boiled Egg", 11000,
-//                "step one." +
-//                        "step two.", 1));
-//        dataSource.create(new Timer(1, "Quinoa", 11000,
-//                "step one." +
-//                        "step two.", 2));
-//        dataSource.create(new Timer(1, "Brown Rice", 11000,
-//                "step one." +
-//                        "step two.", 3));
-    }
+        mGridView = (GridView) findViewById(R.id.timersGrid);}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,5 +73,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mAdapter = new TimerGridAdapter(this, mTimers);
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
+    }
+
+    private boolean checkIfFirstUse() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        boolean isFirstUse = sp.getBoolean(Constants.PREFERENCES_KEY_FIRST_USE, true);
+        if (isFirstUse) {
+            editor.putBoolean(Constants.PREFERENCES_KEY_FIRST_USE, false).apply();
+        }
+        return isFirstUse;
+    }
+
+    private void createDatabase() {
+        TimerDataSource dataSource = new TimerDataSource(this);
+        dataSource.create(new Timer(1, "White Rice", 1080000, "Use 2 cups of water for each cup of white rice. Bring the water to a boil. " + "Add rice and a dash of salt. Cover the rice and reduce the heat to low. " + "When finished, turn off the heat and let stand for a few minutes before serving.", 0));
+        dataSource.create(new Timer(1, "Hard Boiled Egg", 540000, "Add eggs to saucepan in single layer, add water, and then bring to a boil." + "Remove from the burner and cover." + "Let eggs stand for 9 minutes." + "Drain and serve.", 1));
+        dataSource.create(new Timer(1, "Quinoa", 1020000 , "Use 2 cups of water for each cup of quinoa. Bring water to a boil." + "Reduce heat to low and cover." + "Cook for 17 minutes", 2));
+        dataSource.create(new Timer(1, "Brown Rice", 2400000, "Rinse and toast the desired amount of rice." + "Let rice stand to cool." + "Use 2.5 of water for each cup of brown rice. Bring water to a boil." + "Reduce heat to a simmer and cook for 40-50 minutes.", 3));
     }
 }
