@@ -44,7 +44,7 @@ public class AddTimerStepTwoFragment extends Fragment implements View.OnClickLis
         mAddDirectionButton = (ImageView) view.findViewById(R.id.addDirectionButton);
         mBackButton = (ImageView) view.findViewById(R.id.backStepButton);
         mRecylerView = (RecyclerView) view.findViewById(R.id.directionsRecyclerView);
-        mAdapter = new DirectionsListAdapter(mDirections);
+        mAdapter = new DirectionsListAdapter(mDirections, true);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

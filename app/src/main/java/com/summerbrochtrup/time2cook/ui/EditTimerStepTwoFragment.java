@@ -52,9 +52,9 @@ public class EditTimerStepTwoFragment extends Fragment implements View.OnClickLi
 
         if (mTimer.getDirections().equals("none")) {
             mDirections = null;
-            mAdapter = new DirectionsListAdapter(new ArrayList<String>());
+            mAdapter = new DirectionsListAdapter(new ArrayList<String>(), true);
         } else {
-            mAdapter = new DirectionsListAdapter(directionsToArray());
+            mAdapter = new DirectionsListAdapter(directionsToArray(), true);
         }
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

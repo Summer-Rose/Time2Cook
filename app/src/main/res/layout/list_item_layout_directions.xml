@@ -12,13 +12,31 @@
         android:layout_marginRight="10dp"
         android:src="@drawable/ic_flare_dark_salmon_24dp" />
 
-    <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
-        android:id="@+id/directionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/dark_salmon"
-        android:text="cooking directions"
-        android:layout_gravity="center"
-        android:textSize="20sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.summerbrochtrup.time2cook.fonts.RobotoFontTextView
+            android:id="@+id/directionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_salmon"
+            android:text="cooking directions"
+            android:layout_gravity="left"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/deleteListItemIcon"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/deleteListItemIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_close_dark_salmon_24dp" />
+
+
+    </RelativeLayout>
 
 </LinearLayout>
