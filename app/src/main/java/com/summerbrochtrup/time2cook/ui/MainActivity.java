@@ -86,10 +86,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void createDatabase() {
+        final int PLACEHOLDER_INDEX = 1;
         TimerDataSource dataSource = new TimerDataSource(this);
-        dataSource.create(new Timer(1, "White Rice", 1080000, "Use 2 cups of water for each cup of white rice. Bring the water to a boil. " + "Add rice and a dash of salt. Cover the rice and reduce the heat to low. " + "When finished, turn off the heat and let stand for a few minutes before serving.", 0));
-        dataSource.create(new Timer(1, "Hard Boiled Egg", 540000, "Add eggs to saucepan in single layer, add water, and then bring to a boil." + "Remove from the burner and cover." + "Let eggs stand for 9 minutes." + "Drain and serve.", 1));
-        dataSource.create(new Timer(1, "Quinoa", 1020000 , "Use 2 cups of water for each cup of quinoa. Bring water to a boil." + "Reduce heat to low and cover." + "Cook for 17 minutes", 2));
-        dataSource.create(new Timer(1, "Brown Rice", 2400000, "Rinse and toast the desired amount of rice." + "Let rice stand to cool." + "Use 2.5 of water for each cup of brown rice. Bring water to a boil." + "Reduce heat to a simmer and cook for 40-50 minutes.", 3));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "White Rice", 1080000, "Use 2 cups of water for each cup of white rice. Bring the water to a boil. " + "Add rice and a dash of salt. Cover the rice and reduce the heat to low. " + "When finished, turn off the heat and let stand for a few minutes before serving.", 0));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "Brown Rice", 2400000, "Rinse and toast the desired amount of rice." + "Let rice stand to cool." + "Use 2.5 of water for each cup of brown rice. Bring water to a boil." + "Reduce heat to a simmer and cook for 40-50 minutes.", 1));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "Quinoa", 1020000 , "Use 2 cups of water for each cup of quinoa. Bring water to a boil." + "Reduce heat to low and cover." + "Cook for 17 minutes", 2));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "Cous cous", 600000, "Use 1 cup of water for each cup of cous cous." + "Bring water and 1-2 tablespoons of butter to a boil." + "Remove the pan from the heat and add cous cous." + "Cover and cook for 10 minutes", 3));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "Corn on the cob", 210000, "Husk the corn." + "Bring large pot of water to a boil." + "Add corn ears and cover" + "Cook 3-4 minutes.", 0));
+        dataSource.create(new Timer(PLACEHOLDER_INDEX, "Hard Boiled Egg", 540000, "Add eggs to saucepan in single layer, add water, and then bring to a boil." + "Remove from the burner and cover." + "Let eggs stand for 9 minutes." + "Drain and serve.", 1));
     }
 }
