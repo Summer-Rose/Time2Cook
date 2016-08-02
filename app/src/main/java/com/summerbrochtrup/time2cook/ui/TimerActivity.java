@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import at.grabner.circleprogress.CircleProgressView;
 
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
-    private  final String TAG = getClass().getSimpleName();
     private final int REQUEST_CODE = 5;
     private Timer mTimer;
     private CountDownTimer mCountDownTimer;
@@ -237,8 +235,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         int secondsLeft = (int) millisLeft / 1000;
         int minutes = secondsLeft / 60;
         int seconds = secondsLeft - minutes * 60;
-        Log.d("time", millisLeft + " " + secondsLeft + " " + minutes + " " + seconds);
-
         String secondString = Integer.toString(seconds);
         if (seconds <= 9) {
             secondString = "0" + secondString;
@@ -252,7 +248,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onStart() {
-        Log.d(TAG, "onStart");
         super.onStart();
         Intent intent = new Intent(this, TimerService.class);
         intent.putExtra(Constants.EXTRA_KEY_TIMER, Parcels.wrap(mTimer));
@@ -262,7 +257,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onStop() {
-        Log.d(TAG, "onStop");
         super.onStop();
         if (mBound && !timerStarted) {
             unbindService(mServiceConnection);

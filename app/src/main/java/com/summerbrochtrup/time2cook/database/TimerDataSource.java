@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 import com.summerbrochtrup.time2cook.models.Timer;
 
@@ -100,16 +99,13 @@ public class TimerDataSource {
     public void delete(int timerId) {
         SQLiteDatabase database = open();
         database.beginTransaction();
+
         database.delete(TimerSQLiteHelper.TIMERS_TABLE,
                 "_Id=" + timerId,
                 null);
         database.setTransactionSuccessful();
         database.endTransaction();
         //close(database);
-    }
-
-    public void updateStyleIds() {
-
     }
 
     private int getIntFromColumnName(Cursor cursor, String columnName) {

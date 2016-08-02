@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.R;
-import com.summerbrochtrup.time2cook.ui.TimerActivity;
 
 import java.util.ArrayList;
 

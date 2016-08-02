@@ -4,6 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.summerbrochtrup.time2cook.models.Timer;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by summerbrochtrup on 7/22/16.
@@ -16,6 +22,7 @@ public class TimerSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TIME = "TIME";
     public static final String COLUMN_DIRECTIONS = "DIRECTIONS";
     public static final String COLUMN_STYLE_INDEX = "STYLE_INDEX";
+    private static final String TAG = TimerSQLiteHelper.class.getSimpleName();
     private static String CREATE_TIMERS = "CREATE TABLE " + TIMERS_TABLE
             + "(" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_TIMER_NAME + " TEXT, "
