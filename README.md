@@ -12,9 +12,9 @@
 
 ---
 
-<img style="float: right;margin:20px;" alt="main-activity" src="https://raw.githubusercontent.com/summerbr/time2cook/master/main_activity.png">
+<img style="float: right;margin:20px;" alt="main-activity" src="https://raw.githubusercontent.com/summerbr/time2cook/master/main-activity.png">
 <img style="float: right; padding: 5px;" alt="timer-activity" src="https://raw.githubusercontent.com/summerbr/time2cook/master/timer_activity.png">
-<img style="float: right; padding: 5px;" alt="directions-dialog" src="https://raw.githubusercontent.com/summerbr/time2cook/master/directions_dialog.png">
+<img style="float: right; padding: 5px;" alt="directions-dialog" src="https://raw.githubusercontent.com/summerbr/time2cook/master/directions-dialog.png">
 <img style="float: right; padding: 5px;" alt="directions-dialog" src="https://raw.githubusercontent.com/summerbr/time2cook/master/create_timer_one.png">
 <img style="float: right; padding: 5px;" alt="directions-dialog" src="https://raw.githubusercontent.com/summerbr/time2cook/master/edit_timer_two.png">
 <img style="float: right; padding: 5px;" alt="directions-dialog" src="https://raw.githubusercontent.com/summerbr/time2cook/master/select_tone.png">
