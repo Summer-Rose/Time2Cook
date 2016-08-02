@@ -86,6 +86,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             case R.id.action_view_directions:
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_cooking_directions);
+                TextView dialogTitle = (TextView) dialog.findViewById(R.id.dialogTitle);
+                dialogTitle.setText(String.format(getResources().getString(R.string.cooking_directions_title), mTimer.getTimerName()));
                 RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerView);
                 DirectionsListAdapter adapter = new DirectionsListAdapter(getDirections(), false);
                 RecyclerView.LayoutManager layoutManager =

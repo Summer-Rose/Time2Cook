@@ -16,6 +16,7 @@
     <string name="ringtone_chooser_menu_title">Select Timer Tone:</string>
     <string name="success_title">Success!</string>
     <string name="add_timer_error_title">Uh oh!</string>
+    <string name="cooking_directions_title">%s Cooking Directions</string>
 
     <!-- dialog messages -->
     <string name="save_success_message">Your timer,  %s, was saved!</string>
