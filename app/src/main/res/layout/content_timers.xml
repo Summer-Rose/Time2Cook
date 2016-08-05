@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".timers.MainActivity"
+    tools:showIn="@layout/activity_timers">
 
-    <GridView
-        android:id="@+id/timersGrid"
+    <fragment
+        android:id="@+id/fragmentTimers"
+        android:name="com.summerbrochtrup.time2cook.timers.TimersFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:numColumns="2"/>
+        tools:layout="@layout/fragment_timers" />
 
 </RelativeLayout>

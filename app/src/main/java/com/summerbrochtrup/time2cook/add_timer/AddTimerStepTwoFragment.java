@@ -1,4 +1,4 @@
-package com.summerbrochtrup.time2cook.ui;
+package com.summerbrochtrup.time2cook.add_timer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

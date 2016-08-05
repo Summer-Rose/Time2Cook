@@ -12,7 +12,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".timers.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.TimerActivity"
+            android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
             android:theme="@style/AppTheme" />
 
         <service android:name=".service.TimerService" />
 
-        <activity android:name=".ui.AddTimerActivity" />
+        <activity android:name=".add_timer.AddTimerActivity" />
         <activity
             android:name=".ui.EditTimerActivity"
             android:label="@string/app_name"

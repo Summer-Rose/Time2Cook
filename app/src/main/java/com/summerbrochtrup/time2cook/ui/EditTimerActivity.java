@@ -18,6 +18,8 @@ import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.adapters.TimerInputPagerAdapter;
 import com.summerbrochtrup.time2cook.database.TimerDataSource;
 import com.summerbrochtrup.time2cook.models.Timer;
+import com.summerbrochtrup.time2cook.timers.MainActivity;
+
 import org.parceler.Parcels;
 import java.util.List;
 

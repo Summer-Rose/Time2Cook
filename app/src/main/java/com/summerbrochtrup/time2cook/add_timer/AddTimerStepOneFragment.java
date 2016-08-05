@@ -1,4 +1,4 @@
-package com.summerbrochtrup.time2cook.ui;
+package com.summerbrochtrup.time2cook.add_timer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,7 +18,6 @@ public class AddTimerStepOneFragment extends Fragment implements View.OnClickLis
     private ImageView mNextStep;
     private EditText mTimerNameEditText;
     private TimerNumberPicker mHourNumberPicker, mMinNumberPicker, mSecNumberPicker;
-
 
     public static AddTimerStepOneFragment newInstance() {
         AddTimerStepOneFragment fragmentFirst = new AddTimerStepOneFragment();
@@ -69,13 +68,15 @@ public class AddTimerStepOneFragment extends Fragment implements View.OnClickLis
         return mTimerNameEditText.getText().toString().trim();
     }
 
-    public long getMilliseconds() {
-        final int MILLIS_IN_HOUR = 3600000;
-        final int MILLIS_IN_MIN = 60000;
-        final int MILLIS_IN_SEC = 1000;
-        long hour = mHourNumberPicker.getValue() * MILLIS_IN_HOUR;
-        long mins = mMinNumberPicker.getValue() * MILLIS_IN_MIN;
-        long secs = mSecNumberPicker.getValue() * MILLIS_IN_SEC;
-        return hour + mins + secs;
+    public int getHour(){
+        return mHourNumberPicker.getValue();
+    }
+
+    public int getMin() {
+        return mMinNumberPicker.getValue();
+    }
+
+    public int getSec() {
+        return mSecNumberPicker.getValue();
     }
 }

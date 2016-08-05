@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.summerbrochtrup.time2cook.models.Timer;
-import com.summerbrochtrup.time2cook.ui.AddTimerActivity;
-import com.summerbrochtrup.time2cook.ui.AddTimerStepOneFragment;
-import com.summerbrochtrup.time2cook.ui.AddTimerStepTwoFragment;
+import com.summerbrochtrup.time2cook.add_timer.AddTimerActivity;
+import com.summerbrochtrup.time2cook.add_timer.AddTimerStepOneFragment;
+import com.summerbrochtrup.time2cook.add_timer.AddTimerStepTwoFragment;
 import com.summerbrochtrup.time2cook.ui.EditTimerStepOneFragment;
 import com.summerbrochtrup.time2cook.ui.EditTimerStepTwoFragment;
 

@@ -16,7 +16,7 @@ import android.support.v4.app.TaskStackBuilder;
 import com.summerbrochtrup.time2cook.Constants;
 import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.models.Timer;
-import com.summerbrochtrup.time2cook.ui.TimerActivity;
+import com.summerbrochtrup.time2cook.timer.TimerActivity;
 
 import org.parceler.Parcels;
 
@@ -75,6 +75,7 @@ public class TimerService extends Service {
 
     //client methods
     public void play() {
+        mPlayer = MediaPlayer.create(this, mUri);
         mPlayer.start();
         createNotification("Your " + mTimer.getTimerName() + " is finished!");
     }

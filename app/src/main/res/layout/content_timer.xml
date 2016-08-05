@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.summerbrochtrup.time2cook.ui.TimerActivity"
+    tools:context=".timer.TimerActivity"
     tools:showIn="@layout/activity_timer"
     android:background="@color/cream">
 
     <ImageView
-        android:id="@+id/timerActivityImage"
+        android:transitionName="image"
+        android:id="@+id/timerImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
@@ -24,7 +25,7 @@
         android:id="@+id/circleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timerActivityImage"
+        android:layout_below="@+id/timerImage"
         android:layout_above="@+id/buttonLayout"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="14dp"

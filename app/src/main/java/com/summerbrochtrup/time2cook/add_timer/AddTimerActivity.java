@@ -1,4 +1,4 @@
-package com.summerbrochtrup.time2cook.ui;
+package com.summerbrochtrup.time2cook.add_timer;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,23 +14,23 @@ import android.widget.TextView;
 
 import com.summerbrochtrup.time2cook.R;
 import com.summerbrochtrup.time2cook.adapters.TimerInputPagerAdapter;
-import com.summerbrochtrup.time2cook.database.TimerDataSource;
-import com.summerbrochtrup.time2cook.models.Timer;
+import com.summerbrochtrup.time2cook.timers.MainActivity;
 
 import java.util.List;
 
 
-public class AddTimerActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddTimerActivity extends AppCompatActivity implements View.OnClickListener, AddTimerView {
     private TimerInputPagerAdapter mAdapterViewPager;
     private Button mSubmitTimerButton;
     private ViewPager mViewPager;
     private Dialog mDialog;
-    private boolean newTimerComplete = false;
+    private AddTimerPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_timer);
+        mPresenter = new AddTimerPresenterImpl(this, this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mSubmitTimerButton = (Button) findViewById(R.id.submitTimerButton);
@@ -48,57 +48,26 @@ public class AddTimerActivity extends AppCompatActivity implements View.OnClickL
                 AddTimerStepOneFragment stepOneFrag = (AddTimerStepOneFragment) frags.get(1);
                 AddTimerStepTwoFragment stepTwoFragment = (AddTimerStepTwoFragment) frags.get(0);
                 String name = stepOneFrag.getTimerName();
-                int milliseconds = (int) stepOneFrag.getMilliseconds();
+                int milliseconds = mPresenter.getMilliseconds(stepOneFrag.getHour(),
+                        stepOneFrag.getMin(), stepOneFrag.getSec());
                 String directions = stepTwoFragment.getDirections();
                 if (directions.equals("")) {
                     directions = "none";
                 }
-                boolean areGoodInputs = verifyInputs(name, milliseconds);
+                boolean areGoodInputs = mPresenter.areGoodInputs(name, milliseconds);
                 if (!areGoodInputs) break;
-                saveTimerToDatabase(name, milliseconds, directions);
-                newTimerComplete = true;
-                makeDialog(getResources().getString(R.string.success_title),
-                        String.format(getResources().getString(R.string.save_success_message), name));
+                mPresenter.saveTimerToDatabase(name, milliseconds, directions);
                 mDialog.setCancelable(false);
                 break;
             case R.id.dismissDialogIcon:
                 mDialog.dismiss();
-                if (newTimerComplete) {
+                if (mPresenter.checkIfCreationComplete()) {
                     Intent intent = new Intent(this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
                 break;
         }
-    }
-
-    private boolean verifyInputs(String name, int milliseconds) {
-        if (name.equals("")) {
-            makeDialog(getResources().getString(R.string.add_timer_error_title),
-                    getResources().getString(R.string.error_message_no_name));
-            return false;
-        } else if (milliseconds == 0) {
-            makeDialog(getResources().getString(R.string.add_timer_error_title),
-                    getResources().getString(R.string.error_message_no_time));
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private void saveTimerToDatabase(String name, int time, String directions) {
-        final int PLACEHOLDER_INDEX = 0;
-        final int STYLE_INDEX_ONE = 0;
-        final int STYLE_INDEX_FOUR = 3;
-        TimerDataSource dataSource = new TimerDataSource(this);
-        int lastStyleIndex = dataSource.getLastStyleIndex();
-        Timer newTimer;
-        if (lastStyleIndex == STYLE_INDEX_FOUR) {
-            newTimer = new Timer(PLACEHOLDER_INDEX, name, time, directions, STYLE_INDEX_ONE);
-        } else {
-            newTimer = new Timer(PLACEHOLDER_INDEX, name, time, directions, lastStyleIndex + 1);
-        }
-        dataSource.create(newTimer);
     }
 
     private void makeDialog(String title, String message) {
@@ -115,5 +84,23 @@ public class AddTimerActivity extends AppCompatActivity implements View.OnClickL
 
     public void setCurrentItem (int item, boolean smoothScroll) {
         mViewPager.setCurrentItem(item, smoothScroll);
+    }
+
+    @Override
+    public void displayEmptyNameError() {
+        makeDialog(getResources().getString(R.string.add_timer_error_title),
+                getResources().getString(R.string.error_message_no_name));
+    }
+
+    @Override
+    public void displayNoTimeError() {
+        makeDialog(getResources().getString(R.string.add_timer_error_title),
+                getResources().getString(R.string.error_message_no_time));
+    }
+
+    @Override
+    public void displaySuccess(String name) {
+        makeDialog(getResources().getString(R.string.success_title),
+                String.format(getResources().getString(R.string.save_success_message), name));
     }
 }
